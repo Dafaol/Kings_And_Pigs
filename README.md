@@ -1,2 +1,2 @@
 # Kings_And_Pigs
-Terceiro criado a partir do curso NoNeClass .
+Terceiro jogo criado a partir do curso NoNeClass .
