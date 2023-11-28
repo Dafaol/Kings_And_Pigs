@@ -5,6 +5,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float velh = 5f;
+    [SerializeField] private float velv = 7f;
+    [SerializeField] private int totalPulos = 1;
+    [SerializeField]private int qtdPulos = 1;
     private Rigidbody2D meuRB;
     private Animator meuAnim;
     // Start is called before the first frame update
@@ -20,6 +23,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Movimentacao();
+        Pulando();
     }
 
     private void Movimentacao()
@@ -41,5 +45,33 @@ public class PlayerController : MonoBehaviour
         meuAnim.SetBool("Movendo", movimento != 0);
 
     }
-        
+
+    private void Pulando()
+    {
+        //pegando o input de pulo
+        var pulo = Input.GetButtonDown("Jump");
+        //definindo o parametro do velv com base na vcelocidade y do rb
+        meuAnim.SetFloat("Velv", meuRB.velocity.y);
+
+        //checando se pulou e se tem pulos suficiente
+        if (pulo && qtdPulos > 0)
+        {
+            //se pulou , altera a velocidade do eixo Y do rigidbody
+            meuRB.velocity = new Vector2(meuRB.velocity.x, velv);
+            //diminuindo a quantidade de pulos
+            qtdPulos --;
+            //avisando que nao esta no chao
+            meuAnim.SetBool("OnGround", false);
+        }
+    }
+    //colisao
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //checando se esta colidindo com o chao
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            //se tocou no chao entao vai resetar os pulos
+            qtdPulos = totalPulos;
+        }
+    }
 }

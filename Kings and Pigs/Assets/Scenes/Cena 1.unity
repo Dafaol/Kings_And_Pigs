@@ -215,7 +215,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &305907249
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -296,7 +296,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velh: 5
-  meuRB: {fileID: 0}
+  velv: 7
+  totalPulos: 1
+  qtdPulos: 1
 --- !u!95 &305907252
 Animator:
   serializedVersion: 5
@@ -331,7 +333,7 @@ GameObject:
   - component: {fileID: 390981911}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
