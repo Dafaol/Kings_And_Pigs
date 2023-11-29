@@ -72,6 +72,18 @@ public class PlayerController : MonoBehaviour
         {
             //se tocou no chao entao vai resetar os pulos
             qtdPulos = totalPulos;
+            //avisando que tocou no chao
+            meuAnim.SetBool("OnGround", true);
+        }
+    }
+    //saiu da colisao
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        //checando se parou de tocar no chao
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            //parou de tocar no chao , entao tocar animacao de pulo mesmo se nao tiver tocado espaço
+            meuAnim.SetBool("OnGround", false);
         }
     }
 }
