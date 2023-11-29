@@ -8,6 +8,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float velv = 7f;
     [SerializeField] private int totalPulos = 1;
     [SerializeField]private int qtdPulos = 1;
+    //elementos do raycast
+    [SerializeField] private LayerMask layerLevel;
+    private BoxCollider2D boxColl;
     private Rigidbody2D meuRB;
     private Animator meuAnim;
     // Start is called before the first frame update
@@ -17,6 +20,8 @@ public class PlayerController : MonoBehaviour
         meuRB = GetComponent<Rigidbody2D>();
         //pegando o animator
         meuAnim = GetComponent<Animator>();
+        //pegando o box collider
+        boxColl = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -26,6 +31,15 @@ public class PlayerController : MonoBehaviour
         Pulando();
     }
 
+    private void FixedUpdate()
+    {
+        meuAnim.SetBool("OnGround", IsGrounded());
+        //se tocou no chao , reseta os pulos
+        if (IsGrounded())
+        {
+            qtdPulos = totalPulos;
+        }
+    }
     private void Movimentacao()
     {
         //pegando meu input
@@ -61,7 +75,7 @@ public class PlayerController : MonoBehaviour
             //diminuindo a quantidade de pulos
             qtdPulos --;
             //avisando que nao esta no chao
-            meuAnim.SetBool("OnGround", false);
+            //meuAnim.SetBool("OnGround", false);
         }
     }
     //colisao
@@ -71,9 +85,9 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             //se tocou no chao entao vai resetar os pulos
-            qtdPulos = totalPulos;
+            //qtdPulos = totalPulos;
             //avisando que tocou no chao
-            meuAnim.SetBool("OnGround", true);
+            //meuAnim.SetBool("OnGround", true);
         }
     }
     //saiu da colisao
@@ -85,5 +99,27 @@ public class PlayerController : MonoBehaviour
             //parou de tocar no chao , entao tocar animacao de pulo mesmo se nao tiver tocado espaço
             meuAnim.SetBool("OnGround", false);
         }
+    }
+    //raycast de colisaono chao
+    private bool IsGrounded()
+    {
+        //criando o raycast             //pegando os limites do colisor
+        bool chao = Physics2D.Raycast(boxColl.bounds.center, Vector2.down, 0.5f, layerLevel);
+
+        Color cor;
+        if(chao) 
+        {
+            cor = Color.red;
+        }
+        else
+        {
+            cor = Color.green;
+        }
+
+        //debug da linha
+        Debug.DrawRay(boxColl.bounds.center, Vector2.down, cor);
+
+        return chao;
+
     }
 }
