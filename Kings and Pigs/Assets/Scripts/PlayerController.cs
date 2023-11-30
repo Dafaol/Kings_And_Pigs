@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float velv = 7f;
     [SerializeField] private int totalPulos = 1;
     [SerializeField]private int qtdPulos = 1;
+    [SerializeField] private int vida = 3;
+    private float delayDano = 0f;
     //elementos do raycast
     [SerializeField] private LayerMask layerLevel;
     private BoxCollider2D boxColl;
@@ -29,6 +32,16 @@ public class PlayerController : MonoBehaviour
     {
         Movimentacao();
         Pulando();
+        Invencibilidade();
+    }
+
+    private void Invencibilidade()
+    {
+        //diminuindo o dalay dano
+        if (delayDano > 0f)
+        {
+            delayDano -= Time.deltaTime;
+        }
     }
 
     private void FixedUpdate()
@@ -89,6 +102,37 @@ public class PlayerController : MonoBehaviour
             //avisando que tocou no chao
             //meuAnim.SetBool("OnGround", true);
         }
+        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //checando se colidiu com o colisor do inimigo
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            //checando se o Y é maior que o Y do inimigo
+            if(transform.position.y > collision.transform.position.y)
+            {
+                //ganhando impulso
+                meuRB.velocity = new Vector2(meuRB.velocity.x, velv);
+
+                //pegando o animator do pai do colidor do pig E ativar o trigger
+                collision.GetComponentInParent<Animator>().SetTrigger("Dano");
+                //collision.GetComponentInParent<EnemyController>
+            }
+            else
+            {
+                //perdendo vida se o delay dano menor ou igual a 0
+                if(delayDano <= 0f)
+                {
+                    vida--;
+
+                    //reseta o dalay dano
+                    delayDano = 2f;
+                }
+                
+            }
+        }
     }
     //saiu da colisao
     private void OnCollisionExit2D(Collision2D collision)
@@ -100,6 +144,7 @@ public class PlayerController : MonoBehaviour
             meuAnim.SetBool("OnGround", false);
         }
     }
+
     //raycast de colisaono chao
     private bool IsGrounded()
     {
