@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Enemy
+  - Door
   layers:
   - Default
   - TransparentFX
@@ -43,12 +44,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Tilemap
+    uniqueID: 1616708905
+    locked: 0
   - name: Player
     uniqueID: 2949767185
     locked: 0
   - name: Inimigos
     uniqueID: 842971825
-    locked: 0
-  - name: Tilemap
-    uniqueID: 1616708905
     locked: 0

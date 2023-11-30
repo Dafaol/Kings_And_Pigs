@@ -11,8 +11,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField]private int qtdPulos = 1;
     [SerializeField] private int vida = 3;
     private float delayDano = 0f;
+
+    [SerializeField] private DoorControler minhaPorta;
+
+    private bool morto = false;
+
     //elementos do raycast
     [SerializeField] private LayerMask layerLevel;
+    
     private BoxCollider2D boxColl;
     private Rigidbody2D meuRB;
     private Animator meuAnim;
@@ -30,9 +36,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Movimentacao();
-        Pulando();
-        Invencibilidade();
+        if (!morto)
+        {
+            Movimentacao();
+            Pulando();
+            Invencibilidade(); 
+            AbrindoPorta();
+        }
+        
     }
 
     private void Invencibilidade()
@@ -72,7 +83,11 @@ public class PlayerController : MonoBehaviour
         meuAnim.SetBool("Movendo", movimento != 0);
 
     }
-
+    public void Morrendo()
+    {
+        morto = true;
+        meuRB.velocity = Vector2.zero;
+    }
     private void Pulando()
     {
         //pegando o input de pulo
@@ -104,9 +119,24 @@ public class PlayerController : MonoBehaviour
         }
         
     }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        //checando se saiu de uma porta
+        if (collision.gameObject.CompareTag("Door"))
+        {
+            //falando que nao esta em uma porta
+            minhaPorta = null;
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //checando se esta em uma porta
+        if (collision.gameObject.CompareTag("Door"))
+        {
+            minhaPorta = collision.GetComponent<DoorControler>();
+        }
+
         //checando se colidiu com o colisor do inimigo
         if (collision.gameObject.CompareTag("Enemy"))
         {
@@ -129,6 +159,10 @@ public class PlayerController : MonoBehaviour
 
                     //reseta o dalay dano
                     delayDano = 2f;
+                    //avisando ao animator que o player levou dano
+                    meuAnim.SetTrigger("Dano");
+                    //informando a quantidade de vida que tem
+                    meuAnim.SetInteger("Vida", vida);
                 }
                 
             }
@@ -166,5 +200,19 @@ public class PlayerController : MonoBehaviour
 
         return chao;
 
+    }
+    //metodo para abrir a porte
+    private void AbrindoPorta()
+    {
+        //só pode abrir a porta se tem uma porta
+        if(minhaPorta != null)
+        {
+            //checando se apertou a tecla para a porta
+            if (Input.GetKeyUp(KeyCode.W))
+            {
+                //abrindo a porta
+                minhaPorta.Abrindo();
+            }
+        }
     }
 }
