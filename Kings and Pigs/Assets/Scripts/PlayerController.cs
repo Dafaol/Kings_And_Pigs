@@ -152,17 +152,20 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                //perdendo vida se o delay dano menor ou igual a 0
-                if(delayDano <= 0f)
+                if (!morto)
                 {
-                    vida--;
+                    //perdendo vida se o delay dano menor ou igual a 0
+                    if (delayDano <= 0f)
+                    {
+                        vida--;
 
-                    //reseta o dalay dano
-                    delayDano = 2f;
-                    //avisando ao animator que o player levou dano
-                    meuAnim.SetTrigger("Dano");
-                    //informando a quantidade de vida que tem
-                    meuAnim.SetInteger("Vida", vida);
+                        //reseta o dalay dano
+                        delayDano = 2f;
+                        //avisando ao animator que o player levou dano
+                        meuAnim.SetTrigger("Dano");
+                        //informando a quantidade de vida que tem
+                        meuAnim.SetInteger("Vida", vida);
+                    }
                 }
                 
             }
@@ -205,14 +208,28 @@ public class PlayerController : MonoBehaviour
     private void AbrindoPorta()
     {
         //só pode abrir a porta se tem uma porta
-        if(minhaPorta != null)
+        if(minhaPorta != null && !morto)
         {
             //checando se apertou a tecla para a porta
             if (Input.GetKeyUp(KeyCode.W))
             {
                 //abrindo a porta
                 minhaPorta.Abrindo();
+                //invoke
+                Invoke("Entrando", 1f);
+
+                morto = true;
+                meuRB.velocity = Vector2.zero;
+                //indo para a animaçao de parado
+                meuAnim.SetBool("Movendo", false);
             }
         }
+    }
+    private void Entrando()
+    {
+        //indo para o estado de entrando na porta
+        meuAnim.SetTrigger("Entrando");
+
+        
     }
 }

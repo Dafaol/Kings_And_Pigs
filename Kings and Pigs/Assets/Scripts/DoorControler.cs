@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DoorControler : MonoBehaviour
 {
+    [SerializeField] private string destino;
     private Animator meuAnim;
     // Start is called before the first frame update
     void Start()
@@ -20,5 +21,11 @@ public class DoorControler : MonoBehaviour
     public void Abrindo()
     {
         meuAnim.SetTrigger("Abrindo");
+    }
+    //indo para o destino
+    public void IndoParaDestino()
+    {
+        //acessando o game manager
+        FindObjectOfType<GameManager>().MudaCena(destino);
     }
 }
