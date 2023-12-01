@@ -22,6 +22,11 @@ public class DoorControler : MonoBehaviour
     {
         meuAnim.SetTrigger("Abrindo");
     }
+    public bool TenhoDestino()
+    {
+        
+        return destino != "";
+    }
     //indo para o destino
     public void IndoParaDestino()
     {

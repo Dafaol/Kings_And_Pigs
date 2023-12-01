@@ -207,21 +207,25 @@ public class PlayerController : MonoBehaviour
     //metodo para abrir a porte
     private void AbrindoPorta()
     {
-        //só pode abrir a porta se tem uma porta
+        //só pode abrir a porta se tem uma porta e se a porta tem destino
         if(minhaPorta != null && !morto)
         {
-            //checando se apertou a tecla para a porta
-            if (Input.GetKeyUp(KeyCode.W))
+            //checando se a porta tem um destino
+            if (minhaPorta.TenhoDestino())
             {
-                //abrindo a porta
-                minhaPorta.Abrindo();
-                //invoke
-                Invoke("Entrando", 1f);
+                //checando se apertou a tecla para a porta
+                if (Input.GetKeyUp(KeyCode.W))
+                {
+                    //abrindo a porta
+                    minhaPorta.Abrindo();
+                    //invoke
+                    Invoke("Entrando", 1f);
 
-                morto = true;
-                meuRB.velocity = Vector2.zero;
-                //indo para a animaçao de parado
-                meuAnim.SetBool("Movendo", false);
+                    morto = true;
+                    meuRB.velocity = Vector2.zero;
+                    //indo para a animaçao de parado
+                    meuAnim.SetBool("Movendo", false);
+                }
             }
         }
     }
