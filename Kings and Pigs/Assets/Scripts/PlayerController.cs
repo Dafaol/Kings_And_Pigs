@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
 
     private bool morto = false;
 
+    private GameManager gameManager;
+
     //elementos do raycast
     [SerializeField] private LayerMask layerLevel;
     
@@ -31,6 +33,11 @@ public class PlayerController : MonoBehaviour
         meuAnim = GetComponent<Animator>();
         //pegando o box collider
         boxColl = GetComponent<BoxCollider2D>();
+
+        gameManager = FindObjectOfType<GameManager>();
+
+        //pegando a vida
+        vida = gameManager.GetVida();
     }
 
     // Update is called once per frame
@@ -159,6 +166,9 @@ public class PlayerController : MonoBehaviour
                     {
                         vida--;
 
+                        //informar ao game manager que o valor da vida mudou
+                        gameManager.SetVida(vida);
+
                         //reseta o dalay dano
                         delayDano = 2f;
                         //avisando ao animator que o player levou dano
@@ -235,5 +245,9 @@ public class PlayerController : MonoBehaviour
         meuAnim.SetTrigger("Entrando");
 
         
+    }
+    public void Reiniciando()
+    {
+        gameManager.GameOver();
     }
 }
