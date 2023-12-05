@@ -470,7 +470,7 @@ Transform:
   - {fileID: 1387246934528262445}
   - {fileID: 5292283091513789806}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2509248155568988672
 MonoBehaviour:
@@ -485,4 +485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vidaInicial: 3
-  coracoes: []
+  coracoes:
+  - {fileID: 7488703641315911234}
+  - {fileID: 8176293467878692152}
+  - {fileID: 834581855292523298}

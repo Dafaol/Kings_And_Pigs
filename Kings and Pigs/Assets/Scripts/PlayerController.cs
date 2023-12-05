@@ -65,8 +65,8 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         meuAnim.SetBool("OnGround", IsGrounded());
-        //se tocou no chao , reseta os pulos
-        if (IsGrounded())
+        //se tocou no chao , reseta os pulos e esta sem velocidade no eixo Y do rigid body
+        if (IsGrounded() && meuRB.velocity.y < 0.1f)
         {
             qtdPulos = totalPulos;
         }
@@ -165,6 +165,7 @@ public class PlayerController : MonoBehaviour
                     if (delayDano <= 0f)
                     {
                         vida--;
+                        
 
                         //informar ao game manager que o valor da vida mudou
                         gameManager.SetVida(vida);
@@ -175,6 +176,8 @@ public class PlayerController : MonoBehaviour
                         meuAnim.SetTrigger("Dano");
                         //informando a quantidade de vida que tem
                         meuAnim.SetInteger("Vida", vida);
+                        //informando ao game manager que ele tem que ajustar a vida
+                        gameManager.AjustaVida();
                     }
                 }
                 

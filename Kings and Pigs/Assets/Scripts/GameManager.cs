@@ -16,13 +16,13 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        AjustaVida();
     }
 
     // Update is called once per frame
     void Update()
     {
-        AjustaVida();
+        
     }
     //criando o metodo para ir para outra cena
     public void MudaCena(string destino)

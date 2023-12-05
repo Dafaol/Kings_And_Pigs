@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8958572281924423056
+--- !u!1 &8302359228619793877
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 369854039297179705}
-  - component: {fileID: 8751362161433377981}
+  - component: {fileID: 6363468051156769527}
+  - component: {fileID: 6717344079147877435}
   m_Layer: 0
-  m_Name: Global Light 2D
+  m_Name: Luz Janela
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &369854039297179705
+--- !u!4 &6363468051156769527
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8958572281924423056}
+  m_GameObject: {fileID: 8302359228619793877}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -35.74, y: -0.295, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8751362161433377981
+--- !u!114 &6717344079147877435
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8958572281924423056}
+  m_GameObject: {fileID: 8302359228619793877}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_ComponentVersion: 1
-  m_LightType: 4
+  m_LightType: 1
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.11
+  m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 0000000029055d6011e0d1afb1ba3e329b8543b8
@@ -66,8 +66,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0, y: -0.00000011920929, z: 0}
-    m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
+    m_Center: {x: 2.61365, y: -1.5848, z: 0}
+    m_Extent: {x: 3.52225, y: 2.5598, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -78,7 +78,15 @@ MonoBehaviour:
   m_ShapeLightFalloffSize: 0.5
   m_ShapeLightFalloffOffset: {x: 0, y: 0}
   m_ShapePath:
-  - {x: -0.5, y: -0.5, z: 0}
-  - {x: 0.5, y: -0.5, z: 0}
-  - {x: 0.5, y: 0.5, z: 0}
-  - {x: -0.5, y: 0.5, z: 0}
+  - {x: -0.4091568, y: -0.37709388, z: 0}
+  - {x: 0.88833237, y: -3.6536531, z: 0}
+  - {x: 5.6314774, y: -3.6405635, z: 0}
+  - {x: 0.8450012, y: -0.24833521, z: 0}
+  - {x: 0.24256134, y: 0.27749622, z: 0}
+  - {x: 0.2158432, y: 0.3897148, z: 0}
+  - {x: 0.15706253, y: 0.44849595, z: 0}
+  - {x: 0.09921646, y: 0.46793756, z: 0}
+  - {x: -0.27043915, y: 0.46987092, z: 0}
+  - {x: -0.3399048, y: 0.43780845, z: 0}
+  - {x: -0.37196732, y: 0.37368357, z: 0}
+  - {x: -0.4038124, y: 0.29693782, z: 0}
